@@ -1,0 +1,41 @@
+name: Restore exact Skill Canvas source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".upload-parts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore source files
+        shell: bash
+        run: |
+          cat .upload-parts/bundle.* | tr -d '\n\r' | base64 -d > /tmp/skill-exact.tgz
+          tar -xzf /tmp/skill-exact.tgz
+          printf '%s  %s\n' '2db61121e1746d4e7066bcd8d4cda3acf2188944d36ad0afdaf78e809e573b7a' 'server.js' | sha256sum -c -
+          printf '%s  %s\n' '556fffb4a9349d5d11f739f255d7a9265e73047940d36646ab1770e3c9384c82' 'public/app.js' | sha256sum -c -
+          printf '%s  %s\n' '30ced7f8190d7652a4af05296196daa9350fe0e152fc4cac1b8436b0b46da786' 'public/styles.css' | sha256sum -c -
+
+      - name: Commit exact source
+        shell: bash
+        run: |
+          if git diff --quiet -- server.js public/app.js public/styles.css; then
+            echo "Source already exact."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add server.js public/app.js public/styles.css
+          git commit -m "Restore exact Skill Canvas source files"
+          git push
