@@ -108,7 +108,7 @@ const CRISES = [
   ['ต้องนำเสนอให้ผู้บริหารโดยไม่มีเวลาเตรียมตัว','You must present to executives with no prep time.',4],
   ['ข้อมูลที่ใช้ตัดสินใจมีความขัดแย้งกัน','Key decision data conflicts.',5],
   ['เครื่องมือหลักที่ใช้ทำงานใช้งานไม่ได้','Your main work tool stops working.',4],
-  ['งานเร่งด้วน 3 งานเข้าพร้อมกัน','Three urgent tasks arrive at once.',4],
+  ['งานเร่งด่วน 3 งานเข้าพร้อมกัน','Three urgent tasks arrive at once.',4],
   ['พบข้อผิดพลาดหลังส่งงานให้ลูกค้าแล้ว','A major error is found after delivery.',5],
   ['สมาชิกใหม่ในทีมตามงานไม่ทัน','A new teammate cannot keep up.',3],
   ['ผู้มีส่วนได้ส่วนเสียไม่เห็นด้วยกับแนวทางทีม','Stakeholders reject the team approach.',4],
